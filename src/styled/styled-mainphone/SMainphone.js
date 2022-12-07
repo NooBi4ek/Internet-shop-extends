@@ -22,3 +22,15 @@ export const Main_onephone_img = styled.img`
   min-width: 50px;
   max-height: 200px;
 `;
+
+export const Button_buy = styled.button`
+  background-color: #000;
+  color: #fff;
+  padding: 5px 30px;
+  border-radius: 7px;
+  font-weight: 600;
+  border: 1px solid ${(props) => (props.click ? 'red' : 'black')};
+  margin: 15px 0 20px 0;
+  font-size: 18px;
+  transition: 0.3s;
+`;
