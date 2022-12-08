@@ -212,7 +212,9 @@ const shopSlice: IPhones = createSlice({
     },
     addItem(state, action) {
       state.phones = state.phones.map((el) =>
-        el.id === action.payload.id ? { ...el, click: (el.click = true) } : el,
+        el.id === action.payload.phone.id
+          ? { ...el, click: (el.click = true) }
+          : el,
       );
     },
   },
