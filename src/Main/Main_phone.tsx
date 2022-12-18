@@ -7,6 +7,7 @@ import {
   Main_onephone_img,
   Main_phone_wrapper,
 } from '../styled/styled-mainphone/SMainphone';
+import '../styled/styled-mainphone/SMainphone.css';
 import { IPhones } from '../models/models';
 const Main_phone = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,8 @@ const Main_phone = () => {
       {phones.map((phone: IPhones) => (
         <Main_onephone_block key={phone.id}>
           <Main_onephone_img src={'./img/' + phone.img} alt={phone.name} />
-          <div>{phone.name}</div>
+          <div className="phoneName">{phone.name}</div>
+          <div className="phoneName">{phone.price} UAH</div>
           <Button_buy
             key={phone.id}
             onClick={() => {

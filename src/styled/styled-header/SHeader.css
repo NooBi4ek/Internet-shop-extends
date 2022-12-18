@@ -1,0 +1,27 @@
+.busket {
+  background-color: #050402;
+  color: #fff;
+  border: none;
+  font-size: 1vh 2vw;
+  transition: 0.3s ease-in-out;
+  border: none;
+}
+
+.busket:hover {
+  color: gold;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  height: 15vh;
+  width: 100vw;
+  background-color: #050402;
+  align-items: center;
+  color: #fff;
+}
+
+.name_company {
+  font-size: 5vh 2vw;
+  margin-bottom: 2vh;
+}

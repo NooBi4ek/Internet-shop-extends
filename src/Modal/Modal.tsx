@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Modal, Modalcontent, Modal_div } from '../styled/styled-modal/SModal';
-import Basket from './ModalBusket/ModalBusket.tsx';
+import ModalBusket from './ModalBusket/ModalBusket.tsx';
 const Modalbusket = ({ modal, Setmodal }) => {
   const orders = useSelector((state) => state.shop.orders);
   let sum = 0;
@@ -14,7 +14,7 @@ const Modalbusket = ({ modal, Setmodal }) => {
         {orders.length > 0 ? (
           <div>
             {orders.map((el) => (
-              <Basket key={el.id} orders={el} id={el.id} />
+              <ModalBusket key={el.id} orders={el} id={el.id} />
             ))}
             <div> Total sum: {sum}</div>
           </div>

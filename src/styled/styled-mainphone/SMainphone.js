@@ -16,6 +16,12 @@ export const Main_onephone_block = styled.div`
   user-select: none;
   font-size: 18px;
   font-weight: bold;
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 10px 5px 5px #000, -1em 0 0.4em #a5a5a5;
+    transform: translateX(-2em);
+    transform: translateY(-0.1in);
+  }
 `;
 
 export const Main_onephone_img = styled.img`
@@ -32,5 +38,10 @@ export const Button_buy = styled.button`
   border: 1px solid ${(props) => (props.click ? 'red' : 'black')};
   margin: 15px 0 20px 0;
   font-size: 18px;
-  transition: 0.3s;
+  font-style: italic;
+  border: none;
+  transition: 0.5s ease-in-out;
+  &:hover {
+    color: gold;
+  }
 `;

@@ -1,33 +1,52 @@
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { Modalcontent } from '../styled/styled-modal/SModal';
+import '../styled/styled-header/SHeader.css';
 import {
-  UpperHeader_div_normal,
-  UpperHeader_div_small,
-  UpperHeader_list,
-  UpperHeader_list_item,
-  UpperHeader_Wrapper,
-  Upper_Header_button,
+  SearchWrapper,
   Upper_Header_input,
+  WrapperResult,
 } from '../styled/styled-header/SHeader';
-
 const Header = ({ Setmodal }) => {
+  const phones = useSelector((state) => state.shop.phones);
+  const [search, SetSearch] = useState('');
+  const [searchModal, SetSearchModal] = useState(false);
+  const filter = phones.filter((phones) => {
+    return search !== ''
+      ? phones.name.toLowerCase().startsWith(search.toLowerCase())
+      : null;
+  });
   return (
-    <>
-      <UpperHeader_Wrapper>
-        <UpperHeader_list>
-          <UpperHeader_list_item>+38012345678</UpperHeader_list_item>
-          <UpperHeader_list_item>mail@gmail.com</UpperHeader_list_item>
-        </UpperHeader_list>
-        <UpperHeader_div_normal>Name Company</UpperHeader_div_normal>
-        <Upper_Header_button onClick={() => Setmodal(true)}>
-          Busket
-        </Upper_Header_button>
-        <UpperHeader_div_small>Profile</UpperHeader_div_small>
-      </UpperHeader_Wrapper>
-      <UpperHeader_Wrapper>
-        <UpperHeader_div_normal>Catalog</UpperHeader_div_normal>
-        <Upper_Header_input />
-        <UpperHeader_div_small>About us</UpperHeader_div_small>
-      </UpperHeader_Wrapper>
-    </>
+    <header className="wrapper">
+      <div>mail@gmail.com</div>
+      <div className="search_and_name">
+        <div className="name_company">Name company</div>
+        <SearchWrapper
+          searchModal={searchModal}
+          onClick={() => SetSearchModal(false)}
+        >
+          <Modalcontent onClick={(e) => e.stopPropagation()}>
+            <WrapperResult>
+              {filter.map((el) => (
+                <div key={el.id} className="search_result">
+                  {el.name}
+                </div>
+              ))}
+            </WrapperResult>
+          </Modalcontent>
+        </SearchWrapper>
+        <Upper_Header_input
+          placeholder="please,seach..."
+          value={search}
+          searchModal={searchModal}
+          onChange={(e) => SetSearch(e.target.value)}
+          onClick={() => SetSearchModal(true)}
+        />
+      </div>
+      <button className="busket" onClick={() => Setmodal(true)}>
+        Busket
+      </button>
+    </header>
   );
 };
 export default Header;
