@@ -22,6 +22,10 @@
 }
 
 .name_company {
-  font-size: 5vh 2vw;
   margin-bottom: 2vh;
+}
+
+.search_result {
+  font-size: 30px;
+  margin-top: 2vh;
 }

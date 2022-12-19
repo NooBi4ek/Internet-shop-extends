@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 export const UpperHeader_Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
@@ -61,8 +61,8 @@ export const Upper_Header_input = styled.input`
   color: #fff;
   border: 1px solid #524336;
   padding: 5px 0;
-  position: ${(props) => (props.searchModal ? 'fixed' : 'none')};
-  margin-left: ${(props) => (props.searchModal ? '-9vw' : '0')};
+  position: ${(props) => (props.searchModal ? "fixed" : "absolute")};
+  margin-left: -10vw;
 `;
 export const Upper_Header_button = styled.button``;
 
@@ -76,8 +76,8 @@ export const SearchWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: ${(props) => (props.searchModal ? '1' : '0')};
-  pointer-events: ${(props) => (props.searchModal ? 'all' : 'none')};
+  opacity: ${(props) => (props.searchModal ? "1" : "0")};
+  pointer-events: ${(props) => (props.searchModal ? "all" : "none")};
   transition: 0.5s;
 `;
 
