@@ -1,18 +1,21 @@
-import { useSelector } from 'react-redux';
-import { useState } from 'react';
-import { Modalcontent } from '../styled/styled-modal/SModal';
-import '../styled/styled-header/SHeader.css';
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { Modalcontent } from "../styled/styled-modal/SModal";
+import "../styled/styled-header/SHeader.css";
 import {
+  Searching_phone,
   SearchWrapper,
   Upper_Header_input,
   WrapperResult,
-} from '../styled/styled-header/SHeader';
+} from "../styled/styled-header/SHeader";
+import { useNavigate } from "react-router-dom";
 const Header = ({ Setmodal }) => {
   const phones = useSelector((state) => state.shop.phones);
-  const [search, SetSearch] = useState('');
+  const [search, SetSearch] = useState("");
   const [searchModal, SetSearchModal] = useState(false);
+  const navigate = useNavigate();
   const filter = phones.filter((phones) => {
-    return search !== ''
+    return search !== ""
       ? phones.name.toLowerCase().startsWith(search.toLowerCase())
       : null;
   });
@@ -27,10 +30,16 @@ const Header = ({ Setmodal }) => {
         >
           <Modalcontent onClick={(e) => e.stopPropagation()}>
             <WrapperResult>
-              {filter.map((el) => (
-                <div key={el.id} className="search_result">
-                  {el.name}
-                </div>
+              {filter.map((phone) => (
+                <Searching_phone
+                  key={phone.id}
+                  onClick={() => {
+                    navigate(`${phone.id}`);
+                    SetSearchModal(false);
+                  }}
+                >
+                  {phone.name}
+                </Searching_phone>
               ))}
             </WrapperResult>
           </Modalcontent>

@@ -82,6 +82,18 @@ export const SearchWrapper = styled.div`
 `;
 
 export const WrapperResult = styled.div`
-  margin-top: 10vw;
+  margin-top: 10vh;
   color: #000;
+`;
+
+export const Searching_phone = styled.div`
+  max-width: 30vw;
+  font-size: 30px;
+  margin-top: 2vh;
+  transition: 0.3s;
+  &:hover {
+    text-shadow: 1px 1px 5px #a5a5a5;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
 `;
