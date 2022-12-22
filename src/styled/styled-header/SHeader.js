@@ -62,7 +62,7 @@ export const Upper_Header_input = styled.input`
   border: 1px solid #524336;
   padding: 5px 0;
   position: ${(props) => (props.searchModal ? "fixed" : "absolute")};
-  margin-left: -10vw;
+  margin-left: 2vw;
 `;
 export const Upper_Header_button = styled.button``;
 
@@ -91,6 +91,7 @@ export const Searching_phone = styled.div`
   font-size: 30px;
   margin-top: 2vh;
   transition: 0.3s;
+  cursor: pointer;
   &:hover {
     text-shadow: 1px 1px 5px #a5a5a5;
     letter-spacing: 0.05em;

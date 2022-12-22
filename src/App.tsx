@@ -6,6 +6,7 @@ import Modal from "./Modal/Modal.tsx";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import OnePhone from "./OnePhone/OnePhone.tsx";
+import Versus from "./Versus/Versus.tsx";
 const App = () => {
   const [modal, Setmodal] = useState<boolean>(false);
   const phones = useSelector((phone) => phone.shop.phones);
@@ -16,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/:id" element={<OnePhone phones={phones} />} />
+        <Route path="/versus" element={<Versus />} />
       </Routes>
     </>
   );

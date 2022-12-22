@@ -55,6 +55,9 @@ const Header = ({ Setmodal }) => {
       <button className="busket" onClick={() => Setmodal(true)}>
         Busket
       </button>
+      <button className="busket" onClick={() => navigate("/versus")}>
+        Check versus
+      </button>
     </header>
   );
 };
