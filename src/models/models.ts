@@ -11,4 +11,5 @@ export interface IPhones {
   memory?: number | string;
   price?: number | string;
   click?: boolean;
+  click_versus?: boolean;
 }

@@ -1,15 +1,15 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { IPhones } from "../models/models";
-import { DeleteInVersus } from "../store/internet_shop_slice.ts";
-import { ButtonPhone } from "../styled/styled-onePhone/SOnePhone";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { IPhones } from '../models/models';
+import { DeleteInVersus } from '../store/internet_shop_slice.ts';
+import { ButtonPhone } from '../styled/styled-onePhone/SOnePhone';
 import {
   Fill,
   PhoneChar,
   PhoneInfo,
   PhoneName,
   Wrapper,
-} from "../styled/styled-versus/SVersus";
+} from '../styled/styled-versus/SVersus';
 const Versus = () => {
   const versus = useSelector((state) => state.shop.versus_Phone);
   const dispatch = useDispatch();
@@ -17,10 +17,11 @@ const Versus = () => {
     <div>
       {versus.length > 0 ? (
         versus.map((phone: IPhones) => (
-          <Wrapper>
+          <Wrapper key={phone.id}>
             <PhoneName>{phone.name}</PhoneName>
             <PhoneInfo>
-              Price: <PhoneChar>{phone.price}</PhoneChar> UAH
+              Price:
+              <PhoneChar> {phone.price}</PhoneChar> UAH
             </PhoneInfo>
             <PhoneInfo>
               Quantity threads: <PhoneChar>{phone.quantity_threads} </PhoneChar>

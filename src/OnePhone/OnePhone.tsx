@@ -1,30 +1,29 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { IPhones } from "../models/models";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { IPhones } from '../models/models';
 import {
   addToVersus,
   addToOrder,
   addItem,
-} from "../store/internet_shop_slice.ts";
+  ItemToVersus,
+} from '../store/internet_shop_slice.ts';
 import {
   ButtonPhone,
   ImgPhone,
   PhoneName,
   PhonePrice,
   Wrapper,
-} from "../styled/styled-onePhone/SOnePhone";
+} from '../styled/styled-onePhone/SOnePhone';
 const OnePhone = ({ phones }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [click, Setclick] = useState<boolean>(false);
-  const versus = useSelector((state) => state.shop.versus_Phone);
   return (
     <div>
       {phones.map(
         (phone: IPhones) =>
           phone.id == id && (
-            <Wrapper>
+            <Wrapper key={phone.id}>
               <ImgPhone src={`./img/${phone.img}`} alt={`${phone.name}`} />
               <PhoneName>{phone.name}</PhoneName>
               <PhonePrice>{phone.price} UAH</PhonePrice>
@@ -37,20 +36,20 @@ const OnePhone = ({ phones }) => {
                 click={phone.click}
                 disabled={phone.click ? true : false}
               >
-                {phone.click ? "In the box" : "Buy"}
+                {phone.click ? 'In the box' : 'Buy'}
               </ButtonPhone>
               <ButtonPhone
                 onClick={() => {
                   dispatch(addToVersus({ phone }));
-                  Setclick(true);
                   dispatch(ItemToVersus({ phone }));
+                  console.log(phone.click_versus);
                 }}
-                disabled={click ? true : false}
+                disabled={phone.click_versus ? true : false}
               >
-                {click ? "Added to versus" : "Add to versus"}
+                {phone.click_versus ? 'Added to versus' : 'Add to versus'}
               </ButtonPhone>
             </Wrapper>
-          )
+          ),
       )}
     </div>
   );

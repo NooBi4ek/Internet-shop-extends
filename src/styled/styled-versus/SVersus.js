@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   float: left;
@@ -7,7 +7,8 @@ export const Wrapper = styled.div`
   text-align: center;
   margin: 5vh 2vw 0 0;
   border: 1px solid #a5a5a5;
-  padding: 5vh 2vw;
+  padding: 5vh 1vw;
+  width: 400px;
 `;
 
 export const PhoneName = styled.div`

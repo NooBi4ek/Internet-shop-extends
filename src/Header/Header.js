@@ -1,21 +1,21 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import { Modalcontent } from "../styled/styled-modal/SModal";
-import "../styled/styled-header/SHeader.css";
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { Modalcontent } from '../styled/styled-modal/SModal';
+import '../styled/styled-header/SHeader.css';
 import {
   Searching_phone,
   SearchWrapper,
   Upper_Header_input,
   WrapperResult,
-} from "../styled/styled-header/SHeader";
-import { useNavigate } from "react-router-dom";
+} from '../styled/styled-header/SHeader';
+import { useNavigate } from 'react-router-dom';
 const Header = ({ Setmodal }) => {
   const phones = useSelector((state) => state.shop.phones);
-  const [search, SetSearch] = useState("");
+  const [search, SetSearch] = useState('');
   const [searchModal, SetSearchModal] = useState(false);
   const navigate = useNavigate();
   const filter = phones.filter((phones) => {
-    return search !== ""
+    return search !== ''
       ? phones.name.toLowerCase().startsWith(search.toLowerCase())
       : null;
   });
@@ -23,7 +23,9 @@ const Header = ({ Setmodal }) => {
     <header className="wrapper">
       <div>mail@gmail.com</div>
       <div className="search_and_name">
-        <div className="name_company">Name company</div>
+        <div className="name_company" onClick={() => navigate('/')}>
+          Name company
+        </div>
         <SearchWrapper
           searchModal={searchModal}
           onClick={() => SetSearchModal(false)}
@@ -55,7 +57,7 @@ const Header = ({ Setmodal }) => {
       <button className="busket" onClick={() => Setmodal(true)}>
         Busket
       </button>
-      <button className="busket" onClick={() => navigate("/versus")}>
+      <button className="busket" onClick={() => navigate('/versus')}>
         Check versus
       </button>
     </header>
