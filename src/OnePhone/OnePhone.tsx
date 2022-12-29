@@ -42,7 +42,6 @@ const OnePhone = ({ phones }) => {
                 onClick={() => {
                   dispatch(addToVersus({ phone }));
                   dispatch(ItemToVersus({ phone }));
-                  console.log(phone.click_versus);
                 }}
                 disabled={phone.click_versus ? true : false}
               >

@@ -8,24 +8,49 @@ import {
   PhoneChar,
   PhoneInfo,
   PhoneName,
+  Price,
+  Threads,
   Wrapper,
 } from '../styled/styled-versus/SVersus';
 const Versus = () => {
   const versus = useSelector((state) => state.shop.versus_Phone);
+  let max_price =
+    versus.length > 0 &&
+    versus.reduce((acc, curr) => {
+      if (acc.price > curr.price) {
+        return acc;
+      } else return curr;
+    });
+  let max_threads =
+    versus.length > 0 &&
+    versus.reduce((acc, curr) => {
+      if (acc.quantity_threads > curr.quantity_threads) {
+        return acc;
+      } else return curr;
+    });
   const dispatch = useDispatch();
   return (
     <div>
+      {console.log(max_price)}
       {versus.length > 0 ? (
         versus.map((phone: IPhones) => (
           <Wrapper key={phone.id}>
             <PhoneName>{phone.name}</PhoneName>
             <PhoneInfo>
-              Price:
-              <PhoneChar> {phone.price}</PhoneChar> UAH
+              Price:{' '}
+              <Price max={max_price} price={phone.price}>
+                {phone.price} UAH
+              </Price>
             </PhoneInfo>
             <PhoneInfo>
-              Quantity threads: <PhoneChar>{phone.quantity_threads} </PhoneChar>
-              threads
+              Quantity threads:
+              <Threads
+                max_threads={max_threads}
+                threads={phone.quantity_threads}
+              >
+                {phone.quantity_threads}
+                threads
+              </Threads>
             </PhoneInfo>
             <PhoneInfo>
               Front camera: <PhoneChar>{phone.front_camera}</PhoneChar>

@@ -26,6 +26,18 @@ export const PhoneChar = styled.span`
   font-size: 18px;
 `;
 
+export const Price = styled(PhoneChar)`
+  color: ${(props) => (props.max.price === props.price ? 'green' : '#000')};
+  font-weight: ${(props) => (props.max.price === props.price ? '700' : '600')};
+`;
+
+export const Threads = styled(PhoneChar)`
+  color: ${(props) =>
+    props.max_threads.quantity_threads === props.threads ? 'green' : '#000'};
+  font-weight: ${(props) =>
+    props.max_threads.quantity_threads === props.threads ? '700' : '600'};
+`;
+
 export const Fill = styled.div`
   display: flex;
   justify-content: center;
