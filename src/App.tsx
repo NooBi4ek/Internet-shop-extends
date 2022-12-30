@@ -1,12 +1,12 @@
-import { useState } from "react";
-import Header from "./Header/Header";
-import Main from "./Main/Main";
-import React from "react";
-import Modal from "./Modal/Modal.tsx";
-import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
-import OnePhone from "./OnePhone/OnePhone.tsx";
-import Versus from "./Versus/Versus.tsx";
+import { useState } from 'react';
+import Header from './Header/Header.tsx';
+import Main from './Main/Main';
+import React from 'react';
+import Modal from './Modal/Modal.tsx';
+import { useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import OnePhone from './OnePhone/OnePhone.tsx';
+import Versus from './Versus/Versus.tsx';
 const App = () => {
   const [modal, Setmodal] = useState<boolean>(false);
   const phones = useSelector((phone) => phone.shop.phones);

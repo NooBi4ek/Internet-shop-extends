@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { Modalcontent } from '../styled/styled-modal/SModal';
@@ -47,6 +48,7 @@ const Header = ({ Setmodal }) => {
           </Modalcontent>
         </SearchWrapper>
         <Upper_Header_input
+          type="search"
           placeholder="please,seach..."
           value={search}
           searchModal={searchModal}

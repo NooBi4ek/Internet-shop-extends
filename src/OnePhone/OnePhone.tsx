@@ -13,6 +13,7 @@ import {
   ImgPhone,
   PhoneName,
   PhonePrice,
+  Phone_Char,
   Wrapper,
 } from '../styled/styled-onePhone/SOnePhone';
 const OnePhone = ({ phones }) => {
@@ -47,6 +48,12 @@ const OnePhone = ({ phones }) => {
               >
                 {phone.click_versus ? 'Added to versus' : 'Add to versus'}
               </ButtonPhone>
+              <h1>Phone Characteristics</h1>
+              <Phone_Char>Front Camera: {phone.front_camera}</Phone_Char>
+              <Phone_Char>
+                Quantity threads: {phone.quantity_threads} threads
+              </Phone_Char>
+              <Phone_Char>Main Camera: {phone.main_camera}</Phone_Char>
             </Wrapper>
           ),
       )}

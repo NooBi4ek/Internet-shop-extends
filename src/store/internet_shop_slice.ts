@@ -202,10 +202,9 @@ const shopSlice: IPhones = createSlice({
           isArr = true;
         }
       });
-      while (!isArr)
-        if (!isArr) {
-          state.orders.push(action.payload.phone);
-        }
+      if (!isArr) {
+        state.orders.push(action.payload.phone);
+      }
     },
     deleteOrder(state, action) {
       state.orders = state.orders.filter((el) => el.id !== action.payload.id);

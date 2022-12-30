@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ImgPhone = styled.img`
   max-width: 100vw;
@@ -28,7 +28,7 @@ export const ButtonPhone = styled.button`
   padding: 10px 60px;
   border-radius: 7px;
   font-weight: 600;
-  border: 1px solid ${(props) => (props.click ? "red" : "black")};
+  border: 1px solid ${(props) => (props.click ? 'red' : 'black')};
   margin: 5vh 1vw;
   font-size: 18px;
   font-style: italic;
@@ -39,4 +39,12 @@ export const ButtonPhone = styled.button`
     box-shadow: 6px 3px 3px #a5a5a5;
     color: gold;
   }
+`;
+
+export const Phone_Char = styled.div`
+  margin: 1vh 0 0 0;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 `;

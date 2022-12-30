@@ -48,8 +48,7 @@ const Versus = () => {
                 max_threads={max_threads}
                 threads={phone.quantity_threads}
               >
-                {phone.quantity_threads}
-                threads
+                {phone.quantity_threads} threads
               </Threads>
             </PhoneInfo>
             <PhoneInfo>
