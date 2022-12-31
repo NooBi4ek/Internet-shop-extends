@@ -1,6 +1,7 @@
 export interface IPhones {
   id?: number;
   name: string;
+  company: string;
   short_desc?: string;
   img?: string;
   threads_name?: string;

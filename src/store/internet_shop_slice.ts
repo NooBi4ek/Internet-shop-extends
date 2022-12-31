@@ -8,6 +8,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 1,
         name: 'Apple iPhone 11 128GB',
+        company: 'Apple',
         short_desc: 'something',
         img: 'Apple_Iphone11_128.jpg',
         threads_name: 'Apple A13 Bionic',
@@ -23,6 +24,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 2,
         name: 'Apple iPhone 13 128GB',
+        company: 'Apple',
         short_desc: 'something',
         img: 'Apple_Iphone13_128.jpg',
         threads_name: 'Apple A14 Bionic',
@@ -38,6 +40,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 3,
         name: 'Apple iPhone 13 PRO 128GB',
+        company: 'Apple',
         short_desc: 'something',
         img: 'Apple_Iphone13_pro_128.jpg',
         threads_name: 'Apple A15 Bionic',
@@ -53,6 +56,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 4,
         name: 'Apple iPhone 13 PRO MAX 128GB',
+        company: 'Apple',
         short_desc: 'something',
         img: 'Apple_Iphone13_pro_max_128.jpg',
         threads_name: 'Apple A15 Bionic',
@@ -68,6 +72,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 5,
         name: 'Infinix Note 10 PRO 8/128GB',
+        company: 'Infinix',
         short_desc: 'something',
         img: 'Infinix_note10_pro_8_128.jpg',
         threads_name: 'MediaTek Helio G95',
@@ -83,6 +88,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 6,
         name: 'Motorola Moto G60 6/128GB',
+        company: 'Motorola',
         short_desc: 'something',
         img: 'Motorola_moto_g60_6_128.jpg',
         threads_name: 'Qualcomm Snapdragon 732G',
@@ -98,6 +104,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 7,
         name: 'Samsung Galaxy A32 4/64GB',
+        company: 'Samsung',
         short_desc: 'something',
         img: 'Samsung_galaxy_a32_4_64.jpg',
         threads_name: 'MediaTek Helio G80',
@@ -113,6 +120,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 8,
         name: 'Samsung Galaxy A32 4/128GB',
+        company: 'Samsung',
         short_desc: 'something',
         img: 'Samsung_galaxy_a32_4_128.jpg',
         threads_name: 'MediaTek Helio G80',
@@ -128,6 +136,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 9,
         name: 'Samsung Galaxy A53 5G 6/128GB',
+        company: 'Samsung',
         short_desc: 'something',
         img: 'Samsung_galaxy_a53_5g_6_128.jpg',
         threads_name: 'Samsung Exynos 1280',
@@ -143,6 +152,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 10,
         name: 'Samsung Galaxy M32 6/128GB',
+        company: 'Samsung',
         short_desc: 'something',
         img: 'Samsung_galaxy_m32_6_128.jpg',
         threads_name: 'MediaTek Helio G80',
@@ -158,6 +168,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 11,
         name: 'Samsung Galaxy M52 5G 6/128GB',
+        company: 'Samsung',
         short_desc: 'something',
         img: 'Samsung_galaxy_m52_5g_6_128.jpg',
         threads_name: 'Qualcomm Snapdragon 778G',
@@ -173,6 +184,7 @@ const shopSlice: IPhones = createSlice({
       {
         id: 12,
         name: 'Samsung Galaxy M53 5G 6/128GB',
+        company: 'Samsung',
         short_desc: 'something',
         img: 'Samsung_galaxy_m53_5g_6_128.jpg',
         threads_name: 'Qualcomm Snapdragon 778G',
@@ -186,12 +198,29 @@ const shopSlice: IPhones = createSlice({
         click_versus: false,
       },
     ],
+    categories: [
+      { id: 1, namecat: 'All' },
+      { id: 2, namecat: 'Apple' },
+      { id: 3, namecat: 'Samsung' },
+      { id: 4, namecat: 'Infinix' },
+    ],
     orders: [],
     filter_phone: [],
     versus_Phone: [],
     sum: 0,
   },
   reducers: {
+    filterCategories(state, action) {
+      state.filter_phone = [];
+      if (action.payload.el.namecat === 'All') {
+        state.phones.map((el) => state.filter_phone.push(el));
+      }
+      state.phones.filter((phones) => {
+        return phones.company === action.payload.el.namecat
+          ? state.filter_phone.push(phones)
+          : null;
+      });
+    },
     Countsum(state) {
       state.orders.forEach((el) => (state.sum += el.count * el.price));
     },
@@ -208,7 +237,7 @@ const shopSlice: IPhones = createSlice({
     },
     deleteOrder(state, action) {
       state.orders = state.orders.filter((el) => el.id !== action.payload.id);
-      state.phones = state.phones.map((el) =>
+      state.filter_phone = state.phones.map((el) =>
         el.id === action.payload.id ? { ...el, click: (el.click = false) } : el,
       );
     },
@@ -244,14 +273,12 @@ const shopSlice: IPhones = createSlice({
       );
     },
     addItem(state, action) {
-      state.phones = state.phones.map((el) =>
-        el.id === action.payload.phone.id
-          ? { ...el, click: (el.click = true) }
-          : el,
+      state.filter_phone = state.phones.filter((el) =>
+        el.id === action.payload.phone.id ? (el.click = true) : el,
       );
     },
     ItemToVersus(state, action) {
-      state.phones = state.phones.map((el) =>
+      state.phones = state.filter_phone.map((el) =>
         el.id === action.payload.phone.id
           ? { ...el, click_versus: (el.click_versus = true) }
           : el,
@@ -269,5 +296,6 @@ export const {
   deleteOrder,
   deletecount,
   Countsum,
+  filterCategories,
 } = shopSlice.actions;
 export default shopSlice.reducer;

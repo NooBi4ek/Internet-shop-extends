@@ -9,7 +9,7 @@ import OnePhone from './OnePhone/OnePhone.tsx';
 import Versus from './Versus/Versus.tsx';
 const App = () => {
   const [modal, Setmodal] = useState<boolean>(false);
-  const phones = useSelector((phone) => phone.shop.phones);
+  const phones = useSelector((phone) => phone.shop.filter_phone);
   return (
     <>
       <Header Setmodal={Setmodal} />
