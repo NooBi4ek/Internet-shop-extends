@@ -227,19 +227,18 @@ const shopSlice: IPhones = createSlice({
     addToOrder(state, action) {
       let isArr = false;
       state.orders.forEach((el) => {
-        if (el.id === action.payload.id) {
+        if (el.id === action.payload.phone.id) {
+          el.count = el.count + 1;
           isArr = true;
         }
       });
       if (!isArr) {
         state.orders.push(action.payload.phone);
       }
+      console.log(action.payload.phone.id);
     },
     deleteOrder(state, action) {
       state.orders = state.orders.filter((el) => el.id !== action.payload.id);
-      state.filter_phone = state.phones.map((el) =>
-        el.id === action.payload.id ? { ...el, click: (el.click = false) } : el,
-      );
     },
     addToVersus(state, action) {
       let isArr = false;
@@ -272,13 +271,8 @@ const shopSlice: IPhones = createSlice({
         el.id === action.payload.id ? { ...el, count: el.count - 1 } : el,
       );
     },
-    addItem(state, action) {
-      state.filter_phone = state.phones.filter((el) =>
-        el.id === action.payload.phone.id ? (el.click = true) : el,
-      );
-    },
     ItemToVersus(state, action) {
-      state.phones = state.filter_phone.map((el) =>
+      state.filter_phone = state.phones.map((el) =>
         el.id === action.payload.phone.id
           ? { ...el, click_versus: (el.click_versus = true) }
           : el,
@@ -292,7 +286,6 @@ export const {
   addToVersus,
   DeleteInVersus,
   ItemToVersus,
-  addItem,
   deleteOrder,
   deletecount,
   Countsum,

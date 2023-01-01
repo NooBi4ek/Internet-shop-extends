@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
-import { addToOrder, addItem } from '../store/internet_shop_slice.ts';
+import { addToOrder } from '../store/internet_shop_slice.ts';
 import {
   Button_buy,
   Main_onephone_block,
@@ -10,7 +10,6 @@ import {
 import '../styled/styled-mainphone/SMainphone.css';
 import { IPhones } from '../models/models';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 const Main_phone = () => {
   const dispatch = useDispatch();
   const filterphone = useSelector((state) => state.shop.filter_phone);
@@ -32,13 +31,9 @@ const Main_phone = () => {
             key={phone.id}
             onClick={() => {
               dispatch(addToOrder({ phone }));
-              dispatch(addItem({ phone }));
-              console.log(phone.click);
             }}
-            click={phone.click}
-            disabled={phone.click ? true : false}
           >
-            {phone.click ? 'In the box' : 'Buy'}
+            Buy
           </Button_buy>
         </Main_onephone_block>
       ))}

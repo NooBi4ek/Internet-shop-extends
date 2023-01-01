@@ -5,7 +5,6 @@ import { IPhones } from '../models/models';
 import {
   addToVersus,
   addToOrder,
-  addItem,
   ItemToVersus,
 } from '../store/internet_shop_slice.ts';
 import {
@@ -32,7 +31,6 @@ const OnePhone = ({ phones }) => {
                 key={phone.id}
                 onClick={() => {
                   dispatch(addToOrder({ phone }));
-                  dispatch(addItem({ phone }));
                 }}
                 click={phone.click}
                 disabled={phone.click ? true : false}
