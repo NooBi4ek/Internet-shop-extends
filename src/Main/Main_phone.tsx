@@ -1,15 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
-import { addToOrder, clearPhone } from "../store/internet_shop_slice.ts";
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { addToOrder, clearPhone } from '../store/internet_shop_slice.ts';
 import {
   Button_buy,
   Main_onephone_block,
   Main_onephone_img,
   Main_phone_wrapper,
-} from "../styled/styled-mainphone/SMainphone";
-import "../styled/styled-mainphone/SMainphone.css";
-import { IPhones } from "../models/models";
-import { useNavigate } from "react-router-dom";
+} from '../styled/styled-mainphone/SMainphone';
+import '../styled/styled-mainphone/SMainphone.css';
+import { IPhones } from '../models/models';
+import { useNavigate } from 'react-router-dom';
 const Main_phone = () => {
   const dispatch = useDispatch();
   const filterphone = useSelector((state) => state.shop.filter_phone);
@@ -22,7 +22,7 @@ const Main_phone = () => {
       {filterphone.map((phone: IPhones) => (
         <Main_onephone_block key={phone.id}>
           <Main_onephone_img
-            src={"./img/" + phone.img}
+            src={'./img/' + phone.img}
             alt={phone.name}
             onClick={() => {
               navigate(`${phone.id}`);
@@ -36,7 +36,7 @@ const Main_phone = () => {
               dispatch(addToOrder({ phone }));
             }}
           >
-            {phone.click ? "In the box" : "Buy"}
+            {phone.click ? 'In the box' : 'Buy'}
           </Button_buy>
         </Main_onephone_block>
       ))}
