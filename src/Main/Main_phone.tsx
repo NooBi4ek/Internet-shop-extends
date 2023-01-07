@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
-import { addToOrder, clearPhone } from '../store/internet_shop_slice.ts';
+import {
+  addToOrder,
+  startPhone,
+  afterAddOrder,
+} from '../store/internet_shop_slice.ts';
 import {
   Button_buy,
   Main_onephone_block,
@@ -15,7 +19,7 @@ const Main_phone = () => {
   const filterphone = useSelector((state) => state.shop.filter_phone);
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(clearPhone());
+    dispatch(startPhone());
   }, []);
   return (
     <Main_phone_wrapper>
@@ -34,6 +38,7 @@ const Main_phone = () => {
             key={phone.id}
             onClick={() => {
               dispatch(addToOrder({ phone }));
+              dispatch(afterAddOrder({ phone }));
             }}
           >
             {phone.click ? 'In the box' : 'Buy'}

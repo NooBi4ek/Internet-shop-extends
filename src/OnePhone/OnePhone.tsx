@@ -40,7 +40,6 @@ const OnePhone = ({ phones }) => {
               <ButtonPhone
                 onClick={() => {
                   dispatch(addToVersus({ phone }));
-                  dispatch(ItemToVersus({ phone }));
                 }}
                 disabled={phone.click_versus ? true : false}
               >

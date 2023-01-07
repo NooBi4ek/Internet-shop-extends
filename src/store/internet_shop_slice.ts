@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getPathContributingMatches } from '@remix-run/router/dist/utils';
 import { IPhones } from '../models/models';
 
 const shopSlice: IPhones = createSlice({
@@ -205,7 +204,7 @@ const shopSlice: IPhones = createSlice({
       { id: 3, namecat: 'Samsung' },
       { id: 4, namecat: 'Infinix' },
     ],
-    All: false,
+    All_category: false,
     orders: [],
     filter_phone: [],
     versus_Phone: [],
@@ -216,24 +215,21 @@ const shopSlice: IPhones = createSlice({
       state.filter_phone = [];
       if (action.payload.el.namecat === 'All') {
         state.phones.map((el) => state.filter_phone.push(el));
-        state.All = true;
+        state.All_category = true;
       } else {
         state.phones.filter((phones) => {
-          if (phones.company === action.payload.el.namecat) {
-            state.filter_phone.push(phones);
-          }
-          if (phones.companyAll !== '') {
-            phones.companyAll = '';
-          }
+          return (
+            phones.company === action.payload.el.namecat &&
+            state.filter_phone.push(phones)
+          );
         });
-        state.All = false;
+        state.All_category = false;
       }
     },
-    clearPhone(state) {
+    startPhone(state) {
       state.filter_phone = [];
       state.phones.map((el) => state.filter_phone.push(el));
-      state.All = true;
-      console.log(state.All);
+      state.All_category = true;
     },
     Countsum(state) {
       state.orders.forEach((el) => (state.sum += el.count * el.price));
@@ -247,30 +243,45 @@ const shopSlice: IPhones = createSlice({
         }
       });
       if (!isArr) {
+        state.filter_phone = [];
         state.orders.push(action.payload.phone);
         state.filter_phone = state.phones.map((el) =>
           el.id === action.payload.phone.id
             ? { ...el, click: (el.click = true) }
             : el,
         );
-        if (state.All !== true) {
-          state.filter_phone = [];
-          state.phones.map((el) =>
-            el.company === action.payload.phone.company
-              ? state.filter_phone.push(el)
-              : null,
-          );
-        } else {
-          state.filter_phone = [];
-          state.phones.map((el) => state.filter_phone.push(el));
-        }
+      }
+    },
+    afterAddOrder(state, action) {
+      if (state.All_category !== true) {
+        state.filter_phone = [];
+        state.phones.forEach((el) =>
+          el.company === action.payload.phone.company
+            ? state.filter_phone.push(el)
+            : null,
+        );
+      } else {
+        state.filter_phone = [];
+        state.phones.forEach((el) => state.filter_phone.push(el));
       }
     },
     deleteOrder(state, action) {
-      state.orders = state.orders.filter((el) => el.id !== action.payload.id);
-      state.filter_phone = state.phones.map((el) =>
-        el.id === action.payload.id ? { ...el, click: (el.click = false) } : el,
-      );
+      if (action.payload.orders.count > 1) {
+        state.orders = state.orders.map((el) =>
+          el.id === action.payload.orders.id
+            ? { ...el, count: el.count - 1 }
+            : el,
+        );
+      } else {
+        state.filter_phone.filter((el) =>
+          el.id === action.payload.orders.id
+            ? { ...el, click: (el.click = false) }
+            : el,
+        );
+        state.orders = state.orders.filter(
+          (el) => el.id !== action.payload.orders.id,
+        );
+      }
     },
     addToVersus(state, action) {
       let isArr = false;
@@ -281,6 +292,11 @@ const shopSlice: IPhones = createSlice({
       });
       if (!isArr) {
         state.versus_Phone.push(action.payload.phone);
+        state.filter_phone = state.phones.map((el) =>
+          el.id === action.payload.phone.id
+            ? { ...el, click_versus: (el.click_versus = true) }
+            : el,
+        );
       }
     },
     DeleteInVersus(state, action) {
@@ -298,18 +314,6 @@ const shopSlice: IPhones = createSlice({
         el.id === action.payload.id ? { ...el, count: el.count + 1 } : el,
       );
     },
-    deletecount(state, action) {
-      state.orders = state.orders.map((el) =>
-        el.id === action.payload.id ? { ...el, count: el.count - 1 } : el,
-      );
-    },
-    ItemToVersus(state, action) {
-      state.filter_phone = state.phones.map((el) =>
-        el.id === action.payload.phone.id
-          ? { ...el, click_versus: (el.click_versus = true) }
-          : el,
-      );
-    },
   },
 });
 export const {
@@ -317,11 +321,11 @@ export const {
   addcount,
   addToVersus,
   DeleteInVersus,
-  ItemToVersus,
   deleteOrder,
-  deletecount,
   Countsum,
   filterCategories,
-  clearPhone,
+  startPhone,
+  afterAddOrder,
+  afterdeleteOrder,
 } = shopSlice.actions;
 export default shopSlice.reducer;

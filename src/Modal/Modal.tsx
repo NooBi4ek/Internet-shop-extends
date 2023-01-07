@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Countsum } from '../store/internet_shop_slice.ts';
 import { Modal, Modalcontent, Modal_div } from '../styled/styled-modal/SModal';
 import ModalBusket from './ModalBusket/ModalBusket.tsx';
 const Modalbusket = ({ modal, Setmodal }) => {

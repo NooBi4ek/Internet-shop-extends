@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
   addcount,
-  deletecount,
   deleteOrder,
+  afterdeleteOrder,
 } from '../../store/internet_shop_slice.ts';
 import {
   Basket_button,
@@ -30,9 +30,8 @@ const ModalBusket = ({ orders, id }) => {
         </Basket_button>
         <Basket_button
           onClick={() => {
-            orders.count > 1
-              ? dispatch(deletecount({ id }))
-              : dispatch(deleteOrder({ id }));
+            dispatch(deleteOrder({ orders }));
+            dispatch(afterdeleteOrder({ orders }));
           }}
         >
           Delete count
