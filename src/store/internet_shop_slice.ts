@@ -273,11 +273,22 @@ const shopSlice: IPhones = createSlice({
             : el,
         );
       } else {
-        state.filter_phone.filter((el) =>
+        state.filter_phone = state.phones.map((el) =>
           el.id === action.payload.orders.id
             ? { ...el, click: (el.click = false) }
             : el,
         );
+        if (state.All_category !== true) {
+          state.filter_phone = [];
+          state.phones.filter((el) =>
+            el.company === action.payload.orders.company
+              ? state.filter_phone.push(el)
+              : el,
+          );
+        } else {
+          state.filter_phone = [];
+          state.phones.forEach((el) => state.filter_phone.push(el));
+        }
         state.orders = state.orders.filter(
           (el) => el.id !== action.payload.orders.id,
         );
@@ -326,6 +337,5 @@ export const {
   filterCategories,
   startPhone,
   afterAddOrder,
-  afterdeleteOrder,
 } = shopSlice.actions;
 export default shopSlice.reducer;

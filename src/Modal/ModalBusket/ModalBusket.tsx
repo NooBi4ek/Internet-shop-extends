@@ -1,10 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  addcount,
-  deleteOrder,
-  afterdeleteOrder,
-} from '../../store/internet_shop_slice.ts';
+import { useDispatch, useSelector } from 'react-redux';
+import { addcount, deleteOrder } from '../../store/internet_shop_slice.ts';
 import {
   Basket_button,
   Basket_div,
@@ -14,6 +10,7 @@ import {
 
 const ModalBusket = ({ orders, id }) => {
   const dispatch = useDispatch();
+  const phones = useSelector((state) => state.shop.phones);
   return (
     <Basket_wrapper>
       <Basket_img src={'./img/' + orders.img} />
@@ -30,8 +27,7 @@ const ModalBusket = ({ orders, id }) => {
         </Basket_button>
         <Basket_button
           onClick={() => {
-            dispatch(deleteOrder({ orders }));
-            dispatch(afterdeleteOrder({ orders }));
+            dispatch(deleteOrder({ orders, phones }));
           }}
         >
           Delete count
