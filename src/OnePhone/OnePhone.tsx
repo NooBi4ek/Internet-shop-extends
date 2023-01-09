@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { IPhones } from '../models/models';
-import {
-  addToVersus,
-  addToOrder,
-  ItemToVersus,
-} from '../store/internet_shop_slice.ts';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { IPhones } from "../models/models";
+import { addToVersus, addToOrder } from "../store/internet_shop_slice.ts";
 import {
   ButtonPhone,
   ImgPhone,
@@ -14,7 +10,7 @@ import {
   PhonePrice,
   Phone_Char,
   Wrapper,
-} from '../styled/styled-onePhone/SOnePhone';
+} from "../styled/styled-onePhone/SOnePhone";
 const OnePhone = ({ phones }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -35,7 +31,7 @@ const OnePhone = ({ phones }) => {
                 click={phone.click}
                 disabled={phone.click ? true : false}
               >
-                {phone.click ? 'In the box' : 'Buy'}
+                {phone.click ? "In the box" : "Buy"}
               </ButtonPhone>
               <ButtonPhone
                 onClick={() => {
@@ -43,7 +39,7 @@ const OnePhone = ({ phones }) => {
                 }}
                 disabled={phone.click_versus ? true : false}
               >
-                {phone.click_versus ? 'Added to versus' : 'Add to versus'}
+                {phone.click_versus ? "Added to versus" : "Add to versus"}
               </ButtonPhone>
               <h1>Phone Characteristics</h1>
               <Phone_Char>Front Camera: {phone.front_camera}</Phone_Char>
@@ -52,7 +48,7 @@ const OnePhone = ({ phones }) => {
               </Phone_Char>
               <Phone_Char>Main Camera: {phone.main_camera}</Phone_Char>
             </Wrapper>
-          ),
+          )
       )}
     </div>
   );

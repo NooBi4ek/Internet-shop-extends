@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { IPhones } from '../models/models';
-import { DeleteInVersus } from '../store/internet_shop_slice.ts';
-import { ButtonPhone } from '../styled/styled-onePhone/SOnePhone';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { IPhones } from "../models/models";
+import { DeleteInVersus } from "../store/internet_shop_slice.ts";
+import { ButtonPhone } from "../styled/styled-onePhone/SOnePhone";
 import {
   Fill,
   PhoneChar,
@@ -11,7 +11,7 @@ import {
   Price,
   Threads,
   Wrapper,
-} from '../styled/styled-versus/SVersus';
+} from "../styled/styled-versus/SVersus";
 const Versus = () => {
   const versus = useSelector((state) => state.shop.versus_Phone);
   let max_price =
@@ -37,7 +37,7 @@ const Versus = () => {
           <Wrapper key={phone.id}>
             <PhoneName>{phone.name}</PhoneName>
             <PhoneInfo>
-              Price:{' '}
+              Price:{" "}
               <Price max={max_price} price={phone.price}>
                 {phone.price} UAH
               </Price>
